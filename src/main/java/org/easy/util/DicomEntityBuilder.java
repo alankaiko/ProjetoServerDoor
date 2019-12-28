@@ -2,11 +2,11 @@ package org.easy.util;
 
 import java.util.Date;
 
-import org.easy.entity.Equipment;
-import org.easy.entity.Instance;
-import org.easy.entity.Patient;
-import org.easy.entity.Series;
-import org.easy.entity.Study;
+import org.easy.domain.Dispositive;
+import org.easy.domain.Instance;
+import org.easy.domain.Patient;
+import org.easy.domain.Series;
+import org.easy.domain.Study;
 
 
 
@@ -16,11 +16,11 @@ public class DicomEntityBuilder {
 	public static Patient newPatient(String patientAge, Date patientBirthday, String patientID, String patientName, String patientSex){
 		
 		Patient patient = new Patient();
-		patient.setPatientAge(patientAge);
-		patient.setPatientBirthday(patientBirthday);
-		patient.setPatientID(patientID);
-		patient.setPatientName(patientName);
-		patient.setPatientSex(patientSex);
+		patient.setPatientage(patientAge);
+		patient.setBirthday(patientBirthday);
+		patient.setPatientid(patientID);
+		patient.setPatientname(patientName);
+		patient.setPatientsex(patientSex);
 		
 		return patient;
 	}
@@ -30,16 +30,16 @@ public class DicomEntityBuilder {
 			String studyStatusID){
 		
 		Study study = new Study();
-		study.setAccessionNumber(accessionNumber);
-		study.setAdditionalPatientHistory(additionalPatientHistory);
-		study.setAdmittingDiagnosesDescription(admittingDiagnosesDescription);		
-		study.setReferringPhysicianName(referringPhysicianName);
-		study.setStudyDateTime(studyDateTime);
-		study.setStudyID(studyID);
-		study.setStudyDescription(studyDescription);
-		study.setStudyInstanceUID(studyInstanceUID);
-		study.setStudyPriorityID(studyPriorityID);
-		study.setStudyStatusID(studyStatusID);
+		study.setAccessionnumber(accessionNumber);
+		study.setAdditionalpatienthistory(additionalPatientHistory);
+		study.setAdmittingdiagnosesdescription(admittingDiagnosesDescription);		
+		study.setReferringphysicianname(referringPhysicianName);
+		study.setStudydatetime(studyDateTime);
+		study.setStudyid(studyID);
+		study.setStudydescription(studyDescription);
+		study.setStudyinstanceuid(studyInstanceUID);
+		study.setStudypriorityid(studyPriorityID);
+		study.setStudystatusid(studyStatusID);
 		
 		return study;
 	}
@@ -48,34 +48,34 @@ public class DicomEntityBuilder {
 			Date seriesDateTime, String seriesDescription, String seriesInstanceUID, Integer seriesNumber){
 		
 		Series series = new Series();
-		series.setBodyPartExamined(bodyPartExamined);		
+		series.setBodypartexamined(bodyPartExamined);		
 		series.setLaterality(laterality);
-		series.setOperatorsName(operatorsName);
-		series.setPatientPosition(patientPosition);
-		series.setProtocolName(protocolName);
-		series.setSeriesDateTime(seriesDateTime);
-		series.setSeriesDescription(seriesDescription);
-		series.setSeriesInstanceUID(seriesInstanceUID);
-		series.setSeriesNumber(seriesNumber);
+		series.setOperatorsname(operatorsName);
+		series.setPatientposition(patientPosition);
+		series.setProtocolname(protocolName);
+		series.setSeriesdatetime(seriesDateTime);
+		series.setSeriesdescription(seriesDescription);
+		series.setSeriesinstanceuid(seriesInstanceUID);
+		series.setSeriesnumber(seriesNumber);
 		
 		return series;
 	}
 	
-	public static Equipment newEquipment(String conversionType, String deviceSerialNumber, String institutionAddress, String institutionName, 
+	public static Dispositive newEquipment(String conversionType, String deviceSerialNumber, String institutionAddress, String institutionName, 
 			String institutionalDepartmentName, String manufacturer, String manufacturerModelName, String modality, String softwareVersion, 
 			String stationName){
 		
-		Equipment equipment = new Equipment();
-		equipment.setConverstionType(conversionType);
-		equipment.setDeviceSerialNumber(deviceSerialNumber);
-		equipment.setInstitutionAddress(institutionAddress);
-		equipment.setInstitutionName(institutionName);
-		equipment.setInstitutionalDepartmentName(institutionalDepartmentName);
+		Dispositive equipment = new Dispositive();
+		equipment.setConversiontype(conversionType);
+		equipment.setDeviceserialnumber(deviceSerialNumber);
+		equipment.setInstitutionaddress(institutionAddress);
+		equipment.setInstitutionname(institutionName);
+		equipment.setInstitutionaldepartmentname(institutionalDepartmentName);
 		equipment.setManufacturer(manufacturer);
-		equipment.setManufacturerModelName(manufacturerModelName);
+		equipment.setManufacturermodelname(manufacturerModelName);
 		equipment.setModality(modality);
-		equipment.setSoftwareVersion(softwareVersion);
-		equipment.setStationName(stationName);
+		equipment.setSoftwareversion(softwareVersion);
+		equipment.setStationname(stationName);
 		
 		return equipment;
 	}
@@ -86,25 +86,25 @@ public class DicomEntityBuilder {
 			String windowWidth, Integer xrayTubeCurrent){
 		
 		Instance instance = new Instance();
-		instance.setAcquisitionDateTime(acquisitionDateTime);
-		instance.setContentDateTime(contentDateTime);
-		instance.setExposureTime(exposureTime);
-		instance.setImageOrientation(imageOrientation);
-		instance.setImagePosition(imagePosition);
-		instance.setImageType(imageType);
-		instance.setInstanceNumber(instanceNumber);
+		instance.setAcquisitiondatetime(acquisitionDateTime);
+		instance.setContentdatetime(contentDateTime);
+		instance.setExposuretime(exposureTime);
+		instance.setImageorientation(imageOrientation);
+		instance.setImageposition(imagePosition);
+		instance.setImagetype(imageType);
+		instance.setInstancenumber(instanceNumber);
 		instance.setKvp(kvp);
-		instance.setMediaStorageSopInstanceUID(mediaStorageSopInstanceUID);
-		instance.setPatientOrientation(patientOrientation);
-		instance.setPixelSpacing(pixelSpacing);
-		instance.setSliceLocation(sliceLocation);
-		instance.setSliceThickness(sliceThickness);
-		instance.setSopClassUID(sopClassUID);
-		instance.setSopInstanceUID(sopInstanceUID);
-		instance.setTransferSyntaxUID(transferSyntaxUID);
-		instance.setWindowCenter(windowCenter);
-		instance.setWindowWidth(windowWidth);
-		instance.setXrayTubeCurrent(xrayTubeCurrent);
+		instance.setMediastoragesopinstanceuid(mediaStorageSopInstanceUID);
+		instance.setPatientorientation(patientOrientation);
+		instance.setPixelspacing(pixelSpacing);
+		instance.setSlicelocation(sliceLocation);
+		instance.setSlicethickness(sliceThickness);
+		instance.setSopclassuid(sopClassUID);
+		instance.setSopinstanceuid(sopInstanceUID);
+		instance.setTransfersyntaxuid(transferSyntaxUID);
+		instance.setWindowcenter(windowCenter);
+		instance.setWindowwidth(windowWidth);
+		instance.setXraytubecurrent(xrayTubeCurrent);
 		
 		return instance;
 	}

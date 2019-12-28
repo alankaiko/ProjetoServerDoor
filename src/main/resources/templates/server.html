@@ -1,9 +1,36 @@
 <!DOCTYPE HTML>
-<html lang="eng" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/layout">
+<html lang="eng" xmlns:th="http://www.thymeleaf.org">
 <head>	
     <title>Dicom Server</title> 
  	<!-- custom js file -->
-	<script th:src="@{js/server.js}"></script>          
+	<script th:src="@{js/server.js}"></script>   
+	
+	<script th:src="@{js/jquery-1.11.1.js}"></script>
+    <link th:href="@{js/jquery-ui-1.11.4.custom/jquery-ui.css}" rel="stylesheet" />
+    <script th:src="@{js/jquery-ui-1.11.4.custom/external/jquery/jquery.js}"></script>
+	<script th:src="@{js/jquery-ui-1.11.4.custom/jquery-ui.js}"></script> 
+ 	
+ 	<script th:src="@{js/bootstrap.min.js}"></script> 
+ 	<script th:src="@{js/header.js}"></script>
+ 	<link th:href="@{js/vakata-jstree/dist/themes/proton/style.min.css}" rel="stylesheet" /> 
+ 	<script th:src="@{js/vakata-jstree/dist/jstree.min.js}"></script>
+ 	<script th:src="@{js/purl.js}"></script>
+
+    <link  th:href="@{css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{fonts/font-awesome-4.2.0/css/font-awesome.min.css}" rel="stylesheet"  />
+    <link th:href='@{http://fonts.googleapis.com/css?family=Open+Sans}' rel='stylesheet' type='text/css' />
+    <link th:href='@{http://fonts.googleapis.com/css?family=Oswald}' rel='stylesheet' type='text/css' />        
+    <link rel="stylesheet"   th:href="@{css/custom.css}" />
+    
+	<script type="text/javascript" th:src="@{js/jquery.mousewheel-3.0.6.pack.js}"></script>	
+	<script type="text/javascript" th:src="@{js/fancybox/jquery.fancybox.js?v=2.1.5}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{js/fancybox/jquery.fancybox.css?v=2.1.5}" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{js/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5}" />
+	<script type="text/javascript" th:src="@{js/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5}"></script>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7}" />
+	<script type="text/javascript" th:src="@{js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7}"></script>
+	<script type="text/javascript" th:src="@{js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6}"></script>       
 </head>
 <body>
 

@@ -3,7 +3,7 @@ package org.easy.dao;
 
 import java.util.List;
 
-import org.easy.entity.Study;
+import org.easy.domain.Study;
 
 
 public interface StudyDao{

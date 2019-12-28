@@ -1,10 +1,10 @@
 package org.easy.service;
 
-import org.easy.entity.Equipment;
-import org.easy.entity.Instance;
-import org.easy.entity.Patient;
-import org.easy.entity.Series;
-import org.easy.entity.Study;
+import org.easy.domain.Dispositive;
+import org.easy.domain.Instance;
+import org.easy.domain.Patient;
+import org.easy.domain.Series;
+import org.easy.domain.Study;
 import org.easy.server.DicomReader;
 
 
@@ -14,6 +14,6 @@ public interface DBService {
 	Patient buildPatient(DicomReader reader);
 	Study buildStudy(DicomReader reader,Patient patient);
 	Series buildSeries(DicomReader reader, Study study);
-	Equipment buildEquipment(DicomReader reader, Series series);
+	Dispositive buildEquipment(DicomReader reader, Series series);
 	Instance buildInstance(DicomReader reader, Series series);
 }

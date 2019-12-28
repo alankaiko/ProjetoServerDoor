@@ -6,19 +6,18 @@ import javax.persistence.PersistenceContext;
 
 import org.easy.dao.AbstractJpaDao;
 import org.easy.dao.EquipmentDao;
-import org.easy.entity.Equipment;
-
+import org.easy.domain.Dispositive;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EquipmentDaoImpl extends AbstractJpaDao<Equipment> implements EquipmentDao {
+public class EquipmentDaoImpl extends AbstractJpaDao<Dispositive> implements EquipmentDao {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	public EquipmentDaoImpl(){
 		super();
-		setClazz(Equipment.class);
+		setClazz(Dispositive.class);
 	}
 	
 	/*@Transactional
@@ -50,10 +49,10 @@ public class EquipmentDaoImpl extends AbstractJpaDao<Equipment> implements Equip
 	}*/
 	
 	@Override 
-	public Equipment findByPkTBLSeriesID(Long pkTBLSeriesID){
+	public Dispositive findByPkTBLSeriesID(Long pkTBLSeriesID){
 		
 		try{
-			return entityManager.createQuery("select e from Equipment e  where e.series.pkTBLSeriesID LIKE :pkTBLSeriesID", Equipment.class)
+			return entityManager.createQuery("select e from Equipment e  where e.series.pkTBLSeriesID LIKE :pkTBLSeriesID", Dispositive.class)
 			.setParameter("pkTBLSeriesID", pkTBLSeriesID)			
 			.getSingleResult();
 		}catch(Exception e){			

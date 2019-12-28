@@ -1,6 +1,6 @@
 package org.easy.rest;
 
-import org.easy.entity.Study;
+import org.easy.domain.Study;
 
 public class AjaxStudy {
 

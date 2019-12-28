@@ -1,6 +1,6 @@
 package org.easy.rest;
 
-import org.easy.entity.Series;
+import org.easy.domain.Series;
 
 public class AjaxSeries {
 

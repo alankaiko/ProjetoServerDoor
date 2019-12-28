@@ -2,7 +2,7 @@ package org.easy.dao;
 
 import java.util.List;
 
-import org.easy.entity.Instance;
+import org.easy.domain.Instance;
 
 public interface InstanceDao {
 

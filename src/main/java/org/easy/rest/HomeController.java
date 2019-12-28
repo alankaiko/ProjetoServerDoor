@@ -19,10 +19,10 @@ import org.easy.dao.InstanceDao;
 import org.easy.dao.PatientDao;
 import org.easy.dao.SeriesDao;
 import org.easy.dao.StudyDao;
-import org.easy.entity.Instance;
-import org.easy.entity.Patient;
-import org.easy.entity.Series;
-import org.easy.entity.Study;
+import org.easy.domain.Instance;
+import org.easy.domain.Patient;
+import org.easy.domain.Series;
+import org.easy.domain.Study;
 import org.easy.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,9 +108,9 @@ public class HomeController {
 		    model.addAttribute("maxPages", maxPages);	    
 		    
 		    //get related study, series and instance objects
-		    List<Study> studies = (pkTBLPatientID != 0)?studyDao.findByPkTBLPatientID(pkTBLPatientID): studyDao.findByPkTBLPatientID(patients.get(0).getPkTBLPatientID());
-		   	List<Series> serieses = (pkTBLStudyID != 0)?seriesDao.findByPkTBLStudyID(pkTBLStudyID): seriesDao.findByPkTBLStudyID(studies.get(0).getPkTBLStudyID());
-		    List<Instance> instances = (pkTBLSeriesID != 0)?instanceDao.findByPkTBLSeriesID(pkTBLSeriesID): instanceDao.findByPkTBLSeriesID(serieses.get(0).getPkTBLSeriesID());
+		    List<Study> studies = (pkTBLPatientID != 0)?studyDao.findByPkTBLPatientID(pkTBLPatientID): studyDao.findByPkTBLPatientID(patients.get(0).getId());
+		   	List<Series> serieses = (pkTBLStudyID != 0)?seriesDao.findByPkTBLStudyID(pkTBLStudyID): seriesDao.findByPkTBLStudyID(studies.get(0).getId());
+		    List<Instance> instances = (pkTBLSeriesID != 0)?instanceDao.findByPkTBLSeriesID(pkTBLSeriesID): instanceDao.findByPkTBLSeriesID(serieses.get(0).getId());
 		    
 		    //add to our model
 		    model.addAttribute("studies", studies);
@@ -134,7 +134,7 @@ public class HomeController {
 	   	Instance instance = instanceDao.findById(pkTBLInstanceID);
 	   	
 	   	if(instance != null){
-	   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediaStorageSopInstanceUID()+".dcm");
+	   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediastoragesopinstanceuid()+".dcm");
 	    		
 	   		/********************************************************* TEMP IMAGE FILE CREATION *****************************************************************/              
 	   		Dcm2Jpg dcm2Jpg = null; 
@@ -181,7 +181,7 @@ public class HomeController {
 			
 		   	if(instance != null){
 		   		
-		   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediaStorageSopInstanceUID()+".dcm");
+		   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediastoragesopinstanceuid()+".dcm");
 		   		String newfilename = FilenameUtils.removeExtension(dicomFile.getName()) + JPG_EXT; 
 		   		file = new java.io.File( pacsImageStoragePath, newfilename); //create the temporary image file instance		   		
 		   		BufferedImage bimg = ImageIO.read(file);

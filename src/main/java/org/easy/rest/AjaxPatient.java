@@ -1,6 +1,6 @@
 package org.easy.rest;
 
-import org.easy.entity.Patient;
+import org.easy.domain.Patient;
 
 public class AjaxPatient {
 

@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.easy.dao.AbstractJpaDao;
 import org.easy.dao.PatientDao;
-import org.easy.entity.Patient;
+import org.easy.domain.Patient;
 import org.springframework.stereotype.Repository;
 
 

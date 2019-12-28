@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import org.easy.dao.AbstractJpaDao;
 import org.easy.dao.StudyDao;
-import org.easy.entity.Study;
+import org.easy.domain.Study;
 import org.springframework.stereotype.Repository;
 
 @Repository

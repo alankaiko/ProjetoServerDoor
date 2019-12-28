@@ -1,6 +1,6 @@
 package org.easy.rest;
 
-import org.easy.entity.Instance;
+import org.easy.domain.Instance;
 
 public class AjaxInstance {
 

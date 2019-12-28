@@ -9,11 +9,11 @@ import org.easy.dao.InstanceDao;
 import org.easy.dao.PatientDao;
 import org.easy.dao.SeriesDao;
 import org.easy.dao.StudyDao;
-import org.easy.entity.Equipment;
-import org.easy.entity.Instance;
-import org.easy.entity.Patient;
-import org.easy.entity.Series;
-import org.easy.entity.Study;
+import org.easy.domain.Dispositive;
+import org.easy.domain.Instance;
+import org.easy.domain.Patient;
+import org.easy.domain.Series;
+import org.easy.domain.Study;
 import org.easy.server.DicomReader;
 import org.easy.service.DBService;
 import org.easy.util.DicomEntityBuilder;
@@ -111,17 +111,17 @@ public class DBServiceImpl implements DBService {
 	
 	@Transactional
 	@Override
-	public Equipment buildEquipment(DicomReader reader, Series series){
+	public Dispositive buildEquipment(DicomReader reader, Series series){
 		
 		//check if equipment exists
-		Equipment equipment = equipmentDao.findByPkTBLSeriesID(series.getPkTBLSeriesID());
+		Dispositive equipment = equipmentDao.findByPkTBLSeriesID(series.getId());
 		if(equipment == null){
 			equipment = DicomEntityBuilder.newEquipment(reader.getConversionType(), reader.getDeviceSerialNumber(), reader.getInstitutionAddress(),			
 					reader.getInstitutionName(), reader.getInstitutionalDepartmentName(), reader.getManufacturer(), reader.getManufacturerModelName(), 
 					reader.getModality(), reader.getSoftwareVersion(), reader.getStationName());
 			equipment.setSeries(series);//set the Series to Equipment because we now have the pkTBLSeriesID		
 			equipmentDao.save(equipment);
-			equipment = equipmentDao.findByPkTBLSeriesID(series.getPkTBLSeriesID());
+			equipment = equipmentDao.findByPkTBLSeriesID(series.getId());
 			
 		}else{
 			//LOG.info("Equipment already exists; Equipment Primary ID {}", equipment.getPkTBLEquipmentID());
@@ -147,7 +147,7 @@ public class DBServiceImpl implements DBService {
 			instance = instanceDao.findBySopInstanceUID(reader.getSOPInstanceUID());
 			
 		}else{
-				LOG.info("Instance already exists; SOP Instance UID {}, Instance Number {}", instance.getInstanceNumber(), instance.getInstanceNumber());
+				LOG.info("Instance already exists; SOP Instance UID {}, Instance Number {}", instance.getInstancenumber(), instance.getInstancenumber());
 		}
 		
 		return instance;
@@ -171,20 +171,20 @@ public class DBServiceImpl implements DBService {
 				if(study != null){
 					Series series = buildSeries(reader, study);		
 					if(series != null){
-						Equipment equipment = buildEquipment(reader, series);//one2one relationship with series						
+						Dispositive equipment = buildEquipment(reader, series);//one2one relationship with series						
 						Instance instance = buildInstance(reader, series);
 						
 						//update entity modification dates according to the instance creation
-						series.setModifiedDate(instance.getCreatedDate());
+						series.setDatemodify(instance.getDatecreate());
 						seriesDao.save(series);
 						
-						equipment.setModifiedDate(instance.getCreatedDate());
+						equipment.setDatemodify(instance.getDatecreate());
 						equipmentDao.save(equipment);
 						
-						study.setModifiedDate(instance.getCreatedDate());
+						study.setDatemodify(instance.getDatecreate());
 						studyDao.save(study);						
 						
-						patient.setModifiedDate(instance.getCreatedDate());
+						patient.setDatemodify(instance.getDatecreate());
 						patientDao.save(patient);						
 						
 						//try{ entityManager.getTransaction().commit(); }	catch(Exception e){}

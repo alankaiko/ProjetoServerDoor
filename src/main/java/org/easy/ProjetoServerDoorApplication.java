@@ -97,7 +97,7 @@ public class ProjetoServerDoorApplication {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(primaryDataSource());
         em.setPersistenceUnitName("dbdicom");        
-        em.setPackagesToScan(new String[]{"org.easy.entity"}); // package where are the @Entity classes are located, usually your domain package
+        em.setPackagesToScan(new String[]{"org.easy.domain"}); // package where are the @Entity classes are located, usually your domain package
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter(); // JPA implementation 
         em.setJpaVendorAdapter(vendorAdapter);    
 

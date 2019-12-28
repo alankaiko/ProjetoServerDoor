@@ -3,7 +3,7 @@ package org.easy.dao;
 
 import java.util.List;
 
-import org.easy.entity.Series;
+import org.easy.domain.Series;
 
 
 
