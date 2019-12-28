@@ -78,8 +78,8 @@ public class DBServiceImpl implements DBService {
 		Study study = studyDao.findByStudyInstanceUID(reader.getStudyInstanceUID());
 		if(study == null){//let's create new study
 			study = DicomEntityBuilder.newStudy(reader.getAccessionNumber(), reader.getAdditionalPatientHistory(), reader.getAdmittingDiagnosesDescription(),
-						reader.getReferringPhysicianName(), reader.getSeriesDateTime(), reader.getStudyID(), reader.getStudyDescription(), reader.getStudyInstanceUID(), reader.getStudyPriorityID(), 
-						reader.getStudyStatusID());
+				reader.getReferringPhysicianName(), reader.getSeriesDateTime(), reader.getStudyID(), reader.getStudyDescription(), reader.getStudyInstanceUID(), reader.getStudyPriorityID(), 
+				reader.getStudyStatusID());
 			study.setPatient(patient);			
 			studyDao.save(study);	
 			study = studyDao.findByStudyInstanceUID(reader.getStudyInstanceUID());
@@ -114,14 +114,14 @@ public class DBServiceImpl implements DBService {
 	public Dispositive buildEquipment(DicomReader reader, Series series){
 		
 		//check if equipment exists
-		Dispositive equipment = equipmentDao.findByPkTBLSeriesID(series.getId());
+		Dispositive equipment = equipmentDao.findByPkTBLSeriesID(series.getIdseries());
 		if(equipment == null){
 			equipment = DicomEntityBuilder.newEquipment(reader.getConversionType(), reader.getDeviceSerialNumber(), reader.getInstitutionAddress(),			
 					reader.getInstitutionName(), reader.getInstitutionalDepartmentName(), reader.getManufacturer(), reader.getManufacturerModelName(), 
 					reader.getModality(), reader.getSoftwareVersion(), reader.getStationName());
 			equipment.setSeries(series);//set the Series to Equipment because we now have the pkTBLSeriesID		
 			equipmentDao.save(equipment);
-			equipment = equipmentDao.findByPkTBLSeriesID(series.getId());
+			equipment = equipmentDao.findByPkTBLSeriesID(series.getIdseries());
 			
 		}else{
 			//LOG.info("Equipment already exists; Equipment Primary ID {}", equipment.getPkTBLEquipmentID());

@@ -23,11 +23,11 @@ public class InstanceDaoImpl extends AbstractJpaDao<Instance> implements Instanc
 	}
 		
 	@Override
-	public List<Instance> findByPkTBLSeriesID(Long pkTBLSeriesID){
+	public List<Instance> findByPkTBLSeriesID(Long idseries){
 		
 		try{
-			return entityManager.createQuery("select i from Instance i  where i.series.pkTBLSeriesID = :pkTBLSeriesID", Instance.class)
-			.setParameter("pkTBLSeriesID", pkTBLSeriesID)			
+			return entityManager.createQuery("select i from Instance i  where i.series.idseries = :idseries", Instance.class)
+			.setParameter("idseries", idseries)			
 			.getResultList();
 		}catch(Exception e){			
 			return null;		
@@ -35,11 +35,11 @@ public class InstanceDaoImpl extends AbstractJpaDao<Instance> implements Instanc
 	}
 	
 	@Override 
-	public Instance findBySopInstanceUID(String sopInstanceUID){
+	public Instance findBySopInstanceUID(String sopinstanceuid){
 		
 		try{
-			return entityManager.createQuery("select i from Instance i  where i.sopInstanceUID = :sopInstanceUID", Instance.class)
-			.setParameter("sopInstanceUID", sopInstanceUID)
+			return entityManager.createQuery("select i from Instance i  where i.sopinstanceuid = :sopinstanceuid", Instance.class)
+			.setParameter("sopinstanceuid", sopinstanceuid)
 			.getSingleResult();
 		}catch(Exception e){			
 			return null;		
@@ -47,15 +47,15 @@ public class InstanceDaoImpl extends AbstractJpaDao<Instance> implements Instanc
 	}
 	
 	@Override 
-	public List<Instance> findAllByPkTBLPatientID(Long pkTBLPatientID){
+	public List<Instance> findAllByPkTBLPatientID(Long idpatient){
 		
 		try{
 			
 			return entityManager.createQuery("select i from Instance i LEFT OUTER JOIN i.series s " +
 					"LEFT OUTER JOIN i.series.study st " +
 					"LEFT OUTER JOIN i.series.study.patient p " +
-					"where p.pkTBLPatientID = :pkTBLPatientID", Instance.class)
-					.setParameter("pkTBLPatientID", pkTBLPatientID)	
+					"where p.idpatient = :idpatient", Instance.class)
+					.setParameter("idpatient", idpatient)	
 					.getResultList();
 			
 		}catch(Exception e){

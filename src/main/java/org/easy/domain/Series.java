@@ -25,11 +25,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@idseries")
 public class Series implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Long idseries;
 	private String seriesinstanceuid;
 	private String seriesdescription;
 	private Integer seriesnumber;
@@ -51,12 +51,12 @@ public class Series implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIdseries() {
+		return idseries;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdseries(Long idseries) {
+		this.idseries = idseries;
 	}
 
 	@Column(length = 100)
@@ -197,11 +197,11 @@ public class Series implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-			"Series[id=%d, seriesinstanceuid=%s, seriesdescription=%d, seriesnumber=%s, patientposition=%s, "
+			"Series[idseries=%d, seriesinstanceuid=%s, seriesdescription=%d, seriesnumber=%s, patientposition=%s, "
 			+ "bodypartexamined=%s, laterality=%s, operatorsname=%s, protocolname=%s, seriesdatetime=%s, "
 			+ "datecreate=%s, datemodify=%s]",
 			
-			this.id, this.seriesinstanceuid, this.seriesdescription, this.seriesnumber, this.patientposition, 
+			this.idseries, this.seriesinstanceuid, this.seriesdescription, this.seriesnumber, this.patientposition, 
 			this.bodypartexamined, this.laterality, this.operatorsname, this.protocolname, this.seriesdatetime, 
 			this.datecreate, this.datemodify
 		);

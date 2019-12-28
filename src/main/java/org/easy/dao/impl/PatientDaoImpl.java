@@ -52,11 +52,11 @@ public class PatientDaoImpl extends AbstractJpaDao<Patient> implements PatientDa
 	}*/
 	
 	@Override 
-	public Patient findByPatientID(String patientID){
+	public Patient findByPatientID(String patientid){
 		
 		try{
-			return entityManager.createQuery("select p from Patient p where p.patientID LIKE :patientID", Patient.class)
-			.setParameter("patientID", patientID)			
+			return entityManager.createQuery("select p from Patient p where p.patientid LIKE :patientid", Patient.class)
+			.setParameter("patientid", patientid)			
 			.getSingleResult();
 		}catch(Exception e){			
 			return null;		

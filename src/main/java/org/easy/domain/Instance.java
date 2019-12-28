@@ -22,11 +22,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@idinstance")
 public class Instance implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Long idinstance;
 	private Integer instancenumber;
 	private String patientorientation;
 	private String mediastoragesopinstanceuid;
@@ -56,12 +56,12 @@ public class Instance implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIdinstance() {
+		return idinstance;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdinstance(Long idinstance) {
+		this.idinstance = idinstance;
 	}
 
 	public Integer getInstancenumber() {
@@ -269,15 +269,15 @@ public class Instance implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-			"Instance[id=%d, instancenumber=%d, patientorientation=%s, mediastoragesopinstanceuid=%s, sopinstanceuid=%s, "
+			"Instance[idinstance=%d, instancenumber=%d, patientorientation=%s, mediastoragesopinstanceuid=%s, sopinstanceuid=%s, "
 			+ "sopclassuid=%s, transfersyntaxuid=%s, acquisitiondatetime=%s, imagetype=%s, pixelspacing=%f, "
 			+ "imageorientation=%s, xraytubecurrent=%d, exposuretime=%d, kvp=%s, slicelocation=%f, slicethickness=%f, "
 			+ "imageposition=%d, windowcenter=%s, windowwidth=%s, contentdatetime=%s, datecreate=%s, datemodify=%s]",
 
-			id, instancenumber, patientorientation, mediastoragesopinstanceuid, sopinstanceuid, sopclassuid,
-			transfersyntaxuid, acquisitiondatetime, imagetype, pixelspacing, imageorientation, xraytubecurrent,
-			exposuretime, kvp, slicelocation, slicethickness, imageposition, windowcenter, windowwidth,
-			contentdatetime, datecreate, datemodify);
+			this.idinstance, this.instancenumber, this.patientorientation, this.mediastoragesopinstanceuid, this.sopinstanceuid, 
+			this.sopclassuid, this.transfersyntaxuid, this.acquisitiondatetime, this.imagetype, this.pixelspacing, 
+			this.imageorientation, this.xraytubecurrent, this.exposuretime, this.kvp, this.slicelocation, this.slicethickness, 
+			this.contentdatetime, this.datecreate, this.datemodify);
 	}
 
 }

@@ -60,13 +60,13 @@
    					</thead>
    					<tbody>
       					<tr th:each="patient,status : ${patients}" >      						
-         					<td><a th:href="${'/details?pkTBLPatientID='+patient?.pkTBLPatientID}" th:text="${patient?.pkTBLPatientID}"></a></td>   
-         					<td><a th:href="${'/details?pkTBLPatientID='+patient?.pkTBLPatientID}" th:text="${patient?.patientName}"></a></td>        					
-         					<td th:text="${patient?.patientID}"></td>
-         					<td th:text="${patient?.patientSex}"></td>
-         					<td th:text="${patient?.patientAge}"></td>
-         					<td th:text="${patient?.createdDate}"></td>			
-         					<td th:text="${patient?.modifiedDate}"></td> 
+         					<td><a th:href="${'/details?idpatient='+patient?.idpatient}" th:text="${patient?.idpatient}"></a></td>   
+         					<td><a th:href="${'/details?idpatient='+patient?.idpatient}" th:text="${patient?.patientname}"></a></td>        					
+         					<td th:text="${patient?.patientid}"></td>
+         					<td th:text="${patient?.patientsex}"></td>
+         					<td th:text="${patient?.patientage}"></td>
+         					<td th:text="${patient?.datecreate}"></td>			
+         					<td th:text="${patient?.datemodify}"></td> 
          					
       					</tr>
       					<tr th:unless="${patients}">

@@ -49,11 +49,11 @@ public class EquipmentDaoImpl extends AbstractJpaDao<Dispositive> implements Equ
 	}*/
 	
 	@Override 
-	public Dispositive findByPkTBLSeriesID(Long pkTBLSeriesID){
+	public Dispositive findByPkTBLSeriesID(Long idseries){
 		
 		try{
-			return entityManager.createQuery("select e from Equipment e  where e.series.pkTBLSeriesID LIKE :pkTBLSeriesID", Dispositive.class)
-			.setParameter("pkTBLSeriesID", pkTBLSeriesID)			
+			return entityManager.createQuery("select e from Equipment e  where e.series.idseries LIKE :idseries", Dispositive.class)
+			.setParameter("idseries", idseries)			
 			.getSingleResult();
 		}catch(Exception e){			
 			return null;		

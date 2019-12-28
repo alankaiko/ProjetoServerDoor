@@ -23,11 +23,11 @@ public class StudyDaoImpl extends AbstractJpaDao<Study> implements StudyDao {
 	}
 		
 	@Override
-	public List<Study> findByPkTBLPatientID(Long pkTBLPatientID){
+	public List<Study> findByPkTBLPatientID(Long idpatient){
 		
 		try{
-			return entityManager.createQuery("select s from Study s  where s.patient.pkTBLPatientID = :pkTBLPatientID", Study.class)
-			.setParameter("pkTBLPatientID", pkTBLPatientID)			
+			return entityManager.createQuery("select s from Study s  where s.patient.idpatient = :idpatient", Study.class)
+			.setParameter("idpatient", idpatient)			
 			.getResultList();
 		}catch(Exception e){			
 			return null;		
@@ -35,11 +35,11 @@ public class StudyDaoImpl extends AbstractJpaDao<Study> implements StudyDao {
 	}
 	
 	@Override 
-	public Study findByStudyInstanceUID(String studyInstanceUID){
+	public Study findByStudyInstanceUID(String studyinstanceuid){
 		
 		try{
-			return entityManager.createQuery("select s from Study s  where s.studyInstanceUID = :studyInstanceUID", Study.class)
-			.setParameter("studyInstanceUID", studyInstanceUID)			
+			return entityManager.createQuery("select s from Study s  where s.studyinstanceuid = :studyinstanceuid", Study.class)
+			.setParameter("studyinstanceuid", studyinstanceuid)			
 			.getSingleResult();
 		}catch(Exception e){			
 			return null;		

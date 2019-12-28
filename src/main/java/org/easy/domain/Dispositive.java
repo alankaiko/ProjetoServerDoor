@@ -22,11 +22,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@iddispositive")
 public class Dispositive implements Serializable {
 	private static final long serialVersionUID = 6245262777427705812L;
 
-	private Long id;
+	private Long iddispositive;
 	private String institutionname;
 	private String institutionaddress;
 	private String institutionaldepartmentname;
@@ -47,12 +47,12 @@ public class Dispositive implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIddispositive() {
+		return iddispositive;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIddispositive(Long iddispositive) {
+		this.iddispositive = iddispositive;
 	}
 
 	@Column(length = 120)
@@ -185,11 +185,11 @@ public class Dispositive implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-			"Equipment[id=%d, institutionname=%s, institutionaddress=%s, institutionaldepartmentname=%s, "
+			"Equipment[iddispositive=%d, institutionname=%s, institutionaddress=%s, institutionaldepartmentname=%s, "
 			+ "modality=%s, conversiontype=%s, manufacturer=%s, manufacturermodelname=%s, stationname=%s, "
 			+ "deviceserialnumber=%s, softwareversion=%s, datecreation=%s, datemodify=%s]",
 			
-			this.id, this.institutionname, this.institutionaddress, this.institutionaldepartmentname, 
+			this.iddispositive, this.institutionname, this.institutionaddress, this.institutionaldepartmentname, 
 			this.modality, this.conversiontype, this.manufacturer, this.manufacturermodelname, this.stationname, 
 			this.deviceserialnumber, this.softwareversion, this.datecreation, this.datemodify
 		);

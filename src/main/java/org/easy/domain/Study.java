@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@idstudy")
 public class Study implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Long idstudy;
 	private String accessionnumber;
 	private String studyid;
 	private String studyinstanceuid;
@@ -50,12 +50,12 @@ public class Study implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIdstudy() {
+		return idstudy;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdstudy(Long idstudy) {
+		this.idstudy = idstudy;
 	}
 
 	@Column(length = 60)
@@ -197,11 +197,11 @@ public class Study implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-			"Study[id=%d, accessionnumber=%s, studyid=%s, studyinstanceuid=%s, studydescription=%s, studydatetime=%s, "
+			"Study[idstudy=%d, accessionnumber=%s, studyid=%s, studyinstanceuid=%s, studydescription=%s, studydatetime=%s, "
 			+ "referringphysicianname=%s, studypriorityid=%s, studystatusid=%s, additionalpatienthistory=%s, "
 			+ "admittingdiagnosesdescription=%s, datecreate=%s, datemodify=%s]",
 
-			this.id, this.accessionnumber, this.studyid, this.studyinstanceuid, this.studydescription,
+			this.idstudy, this.accessionnumber, this.studyid, this.studyinstanceuid, this.studydescription,
 			this.studydatetime, this.referringphysicianname, this.studypriorityid, this.studystatusid,
 			this.additionalpatienthistory, this.admittingdiagnosesdescription, this.datecreate, this.datemodify
 		);

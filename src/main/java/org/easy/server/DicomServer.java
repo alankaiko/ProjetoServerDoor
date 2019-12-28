@@ -2,8 +2,12 @@ package org.easy.server;
 
 
 
-import com.google.common.eventbus.EventBus;
-
+import java.io.EOFException;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.dcm4che3.data.Attributes;
 import org.dcm4che3.data.Tag;
@@ -11,7 +15,14 @@ import org.dcm4che3.data.VR;
 import org.dcm4che3.io.DicomInputStream;
 import org.dcm4che3.io.DicomInputStream.IncludeBulkData;
 import org.dcm4che3.io.DicomOutputStream;
-import org.dcm4che3.net.*;
+import org.dcm4che3.net.ApplicationEntity;
+import org.dcm4che3.net.Association;
+import org.dcm4che3.net.AssociationHandler;
+import org.dcm4che3.net.Connection;
+import org.dcm4che3.net.Device;
+import org.dcm4che3.net.PDVInputStream;
+import org.dcm4che3.net.State;
+import org.dcm4che3.net.TransferCapability;
 import org.dcm4che3.net.pdu.AAssociateAC;
 import org.dcm4che3.net.pdu.AAssociateRQ;
 import org.dcm4che3.net.pdu.PresentationContext;
@@ -24,14 +35,7 @@ import org.easy.event.NewFileEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import com.google.common.eventbus.EventBus;
 
 
 public class DicomServer {
@@ -55,9 +59,7 @@ public class DicomServer {
         }
 
         @Override
-        protected void store(Association as, PresentationContext pc,
-                             Attributes rq, PDVInputStream data, Attributes rsp)
-                throws IOException {
+        protected void store(Association as, PresentationContext pc, Attributes rq, PDVInputStream data, Attributes rsp) throws IOException {
             rsp.setInt(Tag.Status, VR.US, status);
             if (storageDir == null)
                 return;
@@ -67,15 +69,12 @@ public class DicomServer {
             String cuid = rq.getString(Tag.AffectedSOPClassUID);
             String iuid = rq.getString(Tag.AffectedSOPInstanceUID);
             String tsuid = pc.getTransferSyntax();
-            
-
 
             //File file = new File(storageDir, ipAddress + "_" + iuid + DCM_EXT);
             File file = new File(storageDir, iuid + DCM_EXT);
             try {
                 LOG.info("as: {}", as);
-                storeTo(as, as.createFileMetaInformation(iuid, cuid, tsuid),
-                        data, file);
+                storeTo(as, as.createFileMetaInformation(iuid, cuid, tsuid), data, file);
                 
                 if(!file.exists()){
                 	LOG.error("File {} does not exists! Connection Details--> ipAddress: {}  associationName: {}  sopclassuid: {}  sopinstanceuid: {} transfersyntax: {}", file.getAbsolutePath(), ipAddress, associationName, cuid, iuid, tsuid);
@@ -129,8 +128,7 @@ public class DicomServer {
         ae.addConnection(conn);
     }
 
-    private void storeTo(Association as, Attributes fmi,
-                         PDVInputStream data, File file) throws IOException  {
+    private void storeTo(Association as, Attributes fmi, PDVInputStream data, File file) throws IOException  {
         LOG.info("{}: M-WRITE {}", as, file);
         file.getParentFile().mkdirs();
         DicomOutputStream out = new DicomOutputStream(file);
@@ -202,17 +200,11 @@ public class DicomServer {
             configureConn(ds.conn);
 
             //accept-unknown
-            ds.ae.addTransferCapability(
-                    new TransferCapability(null,
-                            "*",
-                            TransferCapability.Role.SCP,
-                            "*"));
-
+            ds.ae.addTransferCapability( new TransferCapability(null, "*", TransferCapability.Role.SCP, "*"));
             ds.setStorageDirectory(new File(storageDirectory));
 
             ExecutorService executorService = Executors.newCachedThreadPool();
-            ScheduledExecutorService scheduledExecutorService =
-                    Executors.newSingleThreadScheduledExecutor();
+            ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
             ds.device.setScheduledExecutor(scheduledExecutorService);
             ds.device.setExecutor(executorService);
             ds.device.bindConnections();
@@ -229,13 +221,10 @@ public class DicomServer {
     private AssociationHandler associationHandler = new AssociationHandler(){
 		
 		@Override
-		protected AAssociateAC makeAAssociateAC(Association as,
-				AAssociateRQ rq, UserIdentityAC arg2) throws IOException {
-			
+		protected AAssociateAC makeAAssociateAC(Association as, AAssociateRQ rq, UserIdentityAC arg2) throws IOException {	
 			State st = as.getState();
 			
-			if(as != null)
-			{				
+			if(as != null){				
 				LOG.info("makeAAssociateAC: {}  Associate State: {}  Associate State Name: {}", as.toString(), st, st.name());
 				try {					
 					 //eventBus.post(new NewLogEvent(as.toString(),st.name(),as.getSocket().getInetAddress().getHostAddress(), null, null,null,null,null,null,null,null));
@@ -254,8 +243,7 @@ public class DicomServer {
 		}
 		
 		@Override
-		protected AAssociateAC negotiate(Association as, AAssociateRQ rq)
-				throws IOException {
+		protected AAssociateAC negotiate(Association as, AAssociateRQ rq) throws IOException {
 			
 			if(as != null)
 				LOG.info("AAssociateAC negotiate:{}",as.toString());

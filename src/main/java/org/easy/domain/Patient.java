@@ -21,11 +21,11 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@idpatient")
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	private Long idpatient;
 	private String patientid;
 	private String patientname;
 	private Date birthday;
@@ -41,12 +41,12 @@ public class Patient implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getId() {
-		return id;
+	public Long getIdpatient() {
+		return idpatient;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdpatient(Long idpatient) {
+		this.idpatient = idpatient;
 	}
 
 	@Column(length = 100)
@@ -133,10 +133,10 @@ public class Patient implements Serializable {
 	@Override
 	public String toString() {
 		return String.format(
-			"Patient[id=%d, patientid=%s, patientname=%s, birthday=%s, "
+			"Patient[idpatient=%d, patientid=%s, patientname=%s, birthday=%s, "
 			+ "patientage=%s, patientsex=%s, datecreate=%s, datemodify=%s]",
 
-			this.id, this.patientid, this.patientname, this.birthday, this.patientage, 
+			this.idpatient, this.patientid, this.patientname, this.birthday, this.patientage, 
 			this.patientsex, this.datecreate, this.datemodify
 		);
 	}

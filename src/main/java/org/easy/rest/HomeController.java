@@ -92,7 +92,7 @@ public class HomeController {
 	Model model){ 
 		try {
 			LOG.debug("server()");
-			
+
 			int firstResult = (page==null)?0:(page-1) * size;		
 			List<Patient> patients = patientDao.findAll(firstResult, size);
 			model.addAttribute("patients", patients);
@@ -108,9 +108,9 @@ public class HomeController {
 		    model.addAttribute("maxPages", maxPages);	    
 		    
 		    //get related study, series and instance objects
-		    List<Study> studies = (pkTBLPatientID != 0)?studyDao.findByPkTBLPatientID(pkTBLPatientID): studyDao.findByPkTBLPatientID(patients.get(0).getId());
-		   	List<Series> serieses = (pkTBLStudyID != 0)?seriesDao.findByPkTBLStudyID(pkTBLStudyID): seriesDao.findByPkTBLStudyID(studies.get(0).getId());
-		    List<Instance> instances = (pkTBLSeriesID != 0)?instanceDao.findByPkTBLSeriesID(pkTBLSeriesID): instanceDao.findByPkTBLSeriesID(serieses.get(0).getId());
+		    List<Study> studies = (pkTBLPatientID != 0)?studyDao.findByPkTBLPatientID(pkTBLPatientID): studyDao.findByPkTBLPatientID(patients.get(0).getIdpatient());
+		   	List<Series> serieses = (pkTBLStudyID != 0)?seriesDao.findByPkTBLStudyID(pkTBLStudyID): seriesDao.findByPkTBLStudyID(studies.get(0).getIdstudy());
+		    List<Instance> instances = (pkTBLSeriesID != 0)?instanceDao.findByPkTBLSeriesID(pkTBLSeriesID): instanceDao.findByPkTBLSeriesID(serieses.get(0).getIdseries());
 		    
 		    //add to our model
 		    model.addAttribute("studies", studies);
