@@ -62,7 +62,6 @@ public class SeriesDaoImpl extends AbstractJpaDao<Series>   implements SeriesDao
 	
 	@Override 
 	public List<Series> findAllByPkTBLPatientID(Long idpatient){
-		
 		try{
 			
 			return entityManager.createQuery("select sr from Series sr LEFT OUTER JOIN sr.study st " +

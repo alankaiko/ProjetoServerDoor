@@ -30,7 +30,7 @@ public abstract class AbstractJpaDao< T extends Serializable > {
 	   }
 	   
 	   public List< T > findAll(int firstResult, int maxResults){		  
-		  TypedQuery< T > query = entityManager.createQuery("from " + clazz.getName()+" order by modifiedDate desc", clazz);
+		  TypedQuery< T > query = entityManager.createQuery("from " + clazz.getName()+" order by datemodify desc", clazz);
 	      return query.setFirstResult(firstResult).setMaxResults(maxResults).getResultList();	     
 	   }	 	 
 	   

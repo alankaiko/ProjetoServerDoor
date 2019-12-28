@@ -10,6 +10,6 @@ public interface PatientDao {
 	Patient update(Patient patient);
 	List<Patient> findAll(int firstResult, int maxResults);
 	Long count();
-	Patient findById(long pkTBLPatientID);
-	Patient findByPatientID(String patientID);
+	Patient findById(long idpatient);
+	Patient findByPatientID(String patientid);
 }

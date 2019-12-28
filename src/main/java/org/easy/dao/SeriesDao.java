@@ -13,9 +13,9 @@ public interface SeriesDao  {
 	Series update(Series series);
 	List<Series> findAll(int firstResult, int maxResults);
 	Long count();
-	Series findById(long pkTBLSeriesID);
-	List<Series> findByPkTBLStudyID(Long pkTBLStudyID);
-	Series findBySeriesInstanceUID(String seriesInstanceUID);
-	Series findBySeriesInstanceUID(String seriesInstanceUID, Integer seriesNumber);
-	List<Series> findAllByPkTBLPatientID(Long pkTBLPatientID);
+	Series findById(long idseries);
+	List<Series> findByPkTBLStudyID(Long idstudy);
+	Series findBySeriesInstanceUID(String seriesinstanceuid);
+	Series findBySeriesInstanceUID(String seriesinstanceuid, Integer seriesnumber);
+	List<Series> findAllByPkTBLPatientID(Long idpatient);
 }

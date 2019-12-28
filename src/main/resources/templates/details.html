@@ -36,6 +36,8 @@
 
 <div layout:fragment="content">
 
+
+
 <div class="container">
 	<div class="page-header">		
 		<h1 th:text="${patient?.patientname}">Patient Details</h1>		
@@ -58,7 +60,7 @@
       					<li class="jstree-open"><a th:onClick="'getPatient('+${patient.idpatient}+')'" th:text="${patient?.patientname + ' has total of ' + patient.getStudyes().size() + ' Study'}"  ></a>
         					<ul>
           						<li class="jstree-open" th:each="study,status : ${patient.getStudyes()}" >
-          							<a th:onClick="'getStudy('+${study.studyid}+')'"  th:text="${study.studydescription+' has '+ study?.getSeries().size() + ' series'}" ></a>
+          							<a th:onClick="'getStudy('+${study.idstudy}+')'"  th:text="${study.studydescription+' has '+ study?.getSeries().size() + ' series'}" ></a>
           							<ul>
           								<li th:each="series,status : ${study.getSeries()}" >
           									<a th:onClick="'getSeries('+${series.idseries}+')'"  th:text="${series?.seriesdescription+' has '+series.getInstance().size()+' images'}" ></a>
@@ -125,7 +127,7 @@
    					<caption>Patient</caption>		
    					<thead>
 							<tr>
-							<th><a th:onClick="'getPatient('+${patient.idpatient}+')'" th:text="${patient?.patientname + ' has total of ' + patient.getStudyes().size() + ' Study'}"  ></a></th>
+							<th><a th:onClick="'getPatient('+${patient.idpatient}+')'" th:text="${patient?.patientname + ' has total of ' + patient.getStudyes.size() + ' Study'}"  ></a></th>
 							</tr>
 					</thead>	
    					<tbody>
@@ -135,7 +137,7 @@
    									<caption>Study</caption>   	
    									<thead>
 										<tr>
-											<th><a th:onClick="'getStudy('+${study.idpatient}+')'"  th:text="${study.studydescription+' has '+ study?.getSeries().size() + ' series'}" ></a></th>
+											<th><a th:onClick="'getStudy('+${study.idstudy}+')'"  th:text="${study.studydescription+' has '+ study?.getSeries().size() + ' series'}" ></a></th>
 										</tr>
 									</thead>
    																
@@ -147,7 +149,7 @@
 													<caption th:text="${'Series - ' + series.seriesnumber }">Series</caption>
 													<thead>
 														<tr>
-						 									<th ><a th:onClick="'getSeries('+${series.idpatient}+')'"  th:text="${series?.seriesdescription+' has '+series.getInstance().size()+' images'}" ></a></th>
+						 									<th ><a th:onClick="'getSeries('+${series.idseries}+')'"  th:text="${series?.seriesdescription+' has '+series.getInstance().size()+' images'}" ></a></th>
 						 								</tr>
 													</thead>
 						 							<tbody>
@@ -155,7 +157,7 @@
 					   										<td>					   																   											
 																<div class="col-md-2 text-center"  th:each="instance,status : ${series.getInstance()}">																	
 																	<a class="fancybox-images fancybox.iframe"   th:href="${'/showimage/'+instance?.idinstance}" rel="image-gallery" 
-																		th:title="${'instancenumber=['+ instance?.instancenumber + ']' +', sopinstanceuid=['+ instance?.sopinstanceuid + ']' }" >
+																		th:title="${'instancenumber=['+ instance?.instancenumber + ']' +', sopInstanceUID=['+ instance?.sopinstanceuid + ']' }" >
 																		<img th:attr="src=@{${'/details/'+instance?.idinstance}} " style="width: 80px; height: 80px; margin:0px; margin-bottom:0px;" />
 																	</a>
 																	

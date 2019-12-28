@@ -86,9 +86,9 @@ public class HomeController {
 	@RequestMapping(value = "/server", method = RequestMethod.GET)
 	public String server( @RequestParam(defaultValue="1", value="page", required=false) Integer page,
 	@RequestParam(defaultValue="10", value="size", required=false) Integer size, 
-	@RequestParam(defaultValue="0", value="pkTBLPatientID", required=false) Long pkTBLPatientID,
-	@RequestParam(defaultValue="0", value="pkTBLStudyID", required=false) Long pkTBLStudyID,
-	@RequestParam(defaultValue="0", value="pkTBLSeriesID", required=false) Long pkTBLSeriesID,
+	@RequestParam(defaultValue="0", value="idpatient", required=false) Long idpatient,
+	@RequestParam(defaultValue="0", value="idstudy", required=false) Long idstudy,
+	@RequestParam(defaultValue="0", value="idseries", required=false) Long idseries,
 	Model model){ 
 		try {
 			LOG.debug("server()");
@@ -108,9 +108,9 @@ public class HomeController {
 		    model.addAttribute("maxPages", maxPages);	    
 		    
 		    //get related study, series and instance objects
-		    List<Study> studies = (pkTBLPatientID != 0)?studyDao.findByPkTBLPatientID(pkTBLPatientID): studyDao.findByPkTBLPatientID(patients.get(0).getIdpatient());
-		   	List<Series> serieses = (pkTBLStudyID != 0)?seriesDao.findByPkTBLStudyID(pkTBLStudyID): seriesDao.findByPkTBLStudyID(studies.get(0).getIdstudy());
-		    List<Instance> instances = (pkTBLSeriesID != 0)?instanceDao.findByPkTBLSeriesID(pkTBLSeriesID): instanceDao.findByPkTBLSeriesID(serieses.get(0).getIdseries());
+		    List<Study> studies = (idpatient != 0)?studyDao.findByPkTBLPatientID(idpatient): studyDao.findByPkTBLPatientID(patients.get(0).getIdpatient());
+		   	List<Series> serieses = (idstudy != 0)?seriesDao.findByPkTBLStudyID(idstudy): seriesDao.findByPkTBLStudyID(studies.get(0).getIdstudy());
+		    List<Instance> instances = (idseries != 0)?instanceDao.findByPkTBLSeriesID(idseries): instanceDao.findByPkTBLSeriesID(serieses.get(0).getIdseries());
 		    
 		    //add to our model
 		    model.addAttribute("studies", studies);
