@@ -194,18 +194,5 @@ public class Series implements Serializable {
 			datecreate = new Date();
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-			"Series[idseries=%d, seriesinstanceuid=%s, seriesdescription=%d, seriesnumber=%s, patientposition=%s, "
-			+ "bodypartexamined=%s, laterality=%s, operatorsname=%s, protocolname=%s, seriesdatetime=%s, "
-			+ "datecreate=%s, datemodify=%s]",
-			
-			this.idseries, this.seriesinstanceuid, this.seriesdescription, this.seriesnumber, this.patientposition, 
-			this.bodypartexamined, this.laterality, this.operatorsname, this.protocolname, this.seriesdatetime, 
-			this.datecreate, this.datemodify
-		);
-	}
-	
 
 }

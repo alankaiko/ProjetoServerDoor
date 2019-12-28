@@ -48,7 +48,7 @@ public class InstanceDaoImpl extends AbstractJpaDao<Instance> implements Instanc
 	
 	@Override 
 	public List<Instance> findAllByPkTBLPatientID(Long idpatient){
-		
+		System.out.println("instance vindo entao");
 		try{
 			
 			return entityManager.createQuery("select i from Instance i LEFT OUTER JOIN i.series s " +

@@ -1,8 +1,8 @@
 package org.easy.domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class Patient implements Serializable {
 	private String patientsex;
 	private Date datecreate;
 	private Date datemodify;
-	private Collection<Study> studyes;
+	private List<Study> studyes;
 
 	public Patient() {
 		super();
@@ -113,11 +113,11 @@ public class Patient implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "patient")
-	public Collection<Study> getStudyes() {
+	public List<Study> getStudyes() {
 		return studyes;
 	}
 
-	public void setStudyes(Collection<Study> studyes) {
+	public void setStudyes(List<Study> studyes) {
 		this.studyes = studyes;
 	}
 
@@ -128,17 +128,6 @@ public class Patient implements Serializable {
 
 		if (datecreate == null)
 			datecreate = new Date();
-	}
-
-	@Override
-	public String toString() {
-		return String.format(
-			"Patient[idpatient=%d, patientid=%s, patientname=%s, birthday=%s, "
-			+ "patientage=%s, patientsex=%s, datecreate=%s, datemodify=%s]",
-
-			this.idpatient, this.patientid, this.patientname, this.birthday, this.patientage, 
-			this.patientsex, this.datecreate, this.datemodify
-		);
 	}
 
 }

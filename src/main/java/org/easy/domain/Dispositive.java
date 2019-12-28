@@ -181,19 +181,5 @@ public class Dispositive implements Serializable {
 		if (datecreation == null) 
 			datecreation = new Date();
 	}
-
-	@Override
-	public String toString() {
-		return String.format(
-			"Equipment[iddispositive=%d, institutionname=%s, institutionaddress=%s, institutionaldepartmentname=%s, "
-			+ "modality=%s, conversiontype=%s, manufacturer=%s, manufacturermodelname=%s, stationname=%s, "
-			+ "deviceserialnumber=%s, softwareversion=%s, datecreation=%s, datemodify=%s]",
-			
-			this.iddispositive, this.institutionname, this.institutionaddress, this.institutionaldepartmentname, 
-			this.modality, this.conversiontype, this.manufacturer, this.manufacturermodelname, this.stationname, 
-			this.deviceserialnumber, this.softwareversion, this.datecreation, this.datemodify
-		);
-	}
-	
 	
 }

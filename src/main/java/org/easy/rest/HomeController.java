@@ -127,11 +127,11 @@ public class HomeController {
 		return "server";
 	}
 	
-	@RequestMapping(value = "/details/{pkTBLInstanceID}", method = RequestMethod.GET)
-	public ResponseEntity<byte[]> getImage(@PathVariable Long pkTBLInstanceID, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	@RequestMapping(value = "/details/{idinstance}", method = RequestMethod.GET)
+	public ResponseEntity<byte[]> getImage(@PathVariable Long idinstance, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		java.io.File tempImage = null;   
-	   	Instance instance = instanceDao.findById(pkTBLInstanceID);
+	   	Instance instance = instanceDao.findById(idinstance);
 	   	
 	   	if(instance != null){
 	   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediastoragesopinstanceuid()+".dcm");
@@ -165,8 +165,8 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value="/showimage/{pkTBLInstanceID}", method = RequestMethod.GET)
-	public @ResponseBody String showImage(@PathVariable Long pkTBLInstanceID) throws IOException {
+	@RequestMapping(value="/showimage/{idinstance}", method = RequestMethod.GET)
+	public @ResponseBody String showImage(@PathVariable Long idinstance) throws IOException {
 		
 		String img = "";
 		File file = null;
@@ -177,7 +177,7 @@ public class HomeController {
 		
 		try
         {	    	
-			instance = instanceDao.findById(pkTBLInstanceID);
+			instance = instanceDao.findById(idinstance);
 			
 		   	if(instance != null){
 		   		
@@ -207,7 +207,7 @@ public class HomeController {
 			
 	    		if(file.exists())
 	    		{   			
-	    			img = "<img  src=\'/details/"+pkTBLInstanceID+"\' style=\'width: "+width+"px; height: "+height+"px;\' /> ";	
+	    			img = "<img  src=\'/details/"+idinstance+"\' style=\'width: "+width+"px; height: "+height+"px;\' /> ";	
 	    		}
 		   	}
 			
@@ -223,11 +223,11 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public String showDetails(@RequestParam(defaultValue="0", value="pkTBLPatientID", required=false) Long pkTBLPatientID, Model model){ 
+	public String showDetails(@RequestParam(defaultValue="0", value="idpatient", required=false) Long idpatient, Model model){ 
 		
-		if(pkTBLPatientID != 0){		
+		if(idpatient != 0){		
 		    //add to our model		    
-		    model.addAttribute("patient", patientDao.findById(pkTBLPatientID));			
+		    model.addAttribute("patient", patientDao.findById(idpatient));			
 		}
 		
 		return "details";
@@ -281,26 +281,26 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/study", method = RequestMethod.GET)
-	public @ResponseBody AjaxStudy study(@RequestParam(defaultValue="0", value="pkTBLStudyID", required=false) Long pkTBLStudyID){		
-		Study study = studyDao.findById(pkTBLStudyID);			
+	public @ResponseBody AjaxStudy study(@RequestParam(defaultValue="0", value="idstudy", required=false) Long idstudy){		
+		Study study = studyDao.findById(idstudy);			
 		return new AjaxStudy(true, study);
 	}
 	
 	@RequestMapping(value="/series", method = RequestMethod.GET)
-	public @ResponseBody AjaxSeries series(@RequestParam(defaultValue="0", value="pkTBLSeriesID", required=false) Long pkTBLSeriesID){		
-		Series series = seriesDao.findById(pkTBLSeriesID); 	
+	public @ResponseBody AjaxSeries series(@RequestParam(defaultValue="0", value="idseries", required=false) Long idseries){		
+		Series series = seriesDao.findById(idseries); 	
 		return new AjaxSeries(true, series);
 	}
 	
 	@RequestMapping(value="/instance", method = RequestMethod.GET)
-	public @ResponseBody AjaxInstance instance(@RequestParam(defaultValue="0", value="pkTBLInstanceID", required=false) Long pkTBLInstanceID){		
-		Instance instance = instanceDao.findById(pkTBLInstanceID); 	
+	public @ResponseBody AjaxInstance instance(@RequestParam(defaultValue="0", value="idinstance", required=false) Long idinstance){		
+		Instance instance = instanceDao.findById(idinstance); 	
 		return new AjaxInstance(true, instance);
 	}
 	
 	@RequestMapping(value="/patient", method = RequestMethod.GET)
-	public @ResponseBody AjaxPatient patient(@RequestParam(defaultValue="0", value="pkTBLPatientID", required=false) Long pkTBLPatientID){		
-		Patient patient = patientDao.findById(pkTBLPatientID); 	
+	public @ResponseBody AjaxPatient patient(@RequestParam(defaultValue="0", value="idpatient", required=false) Long idpatient){		
+		Patient patient = patientDao.findById(idpatient); 	
 		return new AjaxPatient(true, patient);
 	}
 }

@@ -24,7 +24,7 @@ public class StudyDaoImpl extends AbstractJpaDao<Study> implements StudyDao {
 		
 	@Override
 	public List<Study> findByPkTBLPatientID(Long idpatient){
-		
+		System.out.println("study dao imp");
 		try{
 			return entityManager.createQuery("select s from Study s  where s.patient.idpatient = :idpatient", Study.class)
 			.setParameter("idpatient", idpatient)			

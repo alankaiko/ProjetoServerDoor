@@ -127,7 +127,7 @@
    					<caption>Patient</caption>		
    					<thead>
 							<tr>
-							<th><a th:onClick="'getPatient('+${patient.idpatient}+')'" th:text="${patient?.patientname + ' has total of ' + patient.getStudyes.size() + ' Study'}"  ></a></th>
+							<th><a th:onClick="'getPatient('+${patient.idpatient}+')'" th:text="${patient?.patientname + ' has total of ' + patient.getStudyes().size() + ' Study'}"  ></a></th>
 							</tr>
 					</thead>	
    					<tbody>

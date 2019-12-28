@@ -194,17 +194,4 @@ public class Study implements Serializable {
 			datecreate = new Date();
 	}
 
-	@Override
-	public String toString() {
-		return String.format(
-			"Study[idstudy=%d, accessionnumber=%s, studyid=%s, studyinstanceuid=%s, studydescription=%s, studydatetime=%s, "
-			+ "referringphysicianname=%s, studypriorityid=%s, studystatusid=%s, additionalpatienthistory=%s, "
-			+ "admittingdiagnosesdescription=%s, datecreate=%s, datemodify=%s]",
-
-			this.idstudy, this.accessionnumber, this.studyid, this.studyinstanceuid, this.studydescription,
-			this.studydatetime, this.referringphysicianname, this.studypriorityid, this.studystatusid,
-			this.additionalpatienthistory, this.admittingdiagnosesdescription, this.datecreate, this.datemodify
-		);
-	}
-
 }
