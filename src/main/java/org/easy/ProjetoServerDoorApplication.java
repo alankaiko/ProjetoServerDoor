@@ -104,7 +104,7 @@ public class ProjetoServerDoorApplication {
         return em;
     }
     
-    //@Bean
+    @Bean
     @Primary //configure the primary database
     @ConfigurationProperties(prefix="datasource.primary")
     public DataSource primaryDataSource() {

@@ -118,10 +118,10 @@ public class HomeController {
 		   	model.addAttribute("instances", instances);		
 			
 			LOG.info("page no:{} page size:{} nrOfPages:{} maxPages:{}",page,size,nrOfPages,maxPages);		
-			System.out.println("rodando aqui");
 			
 		} catch (Exception e) {
-			System.out.println("erroooooooo");
+			LOG.error("Erro ao Executar o Método Server ----- em HomeController");
+			e.printStackTrace();
 		}
 		
 		return "server";

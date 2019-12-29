@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
 import org.easy.component.ActiveDicoms;
 import org.easy.event.NewFileEvent;
 import org.easy.server.DicomReader;
-import org.easy.service.DBService;
+import org.easy.service.inferf.DBService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

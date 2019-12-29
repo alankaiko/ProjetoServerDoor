@@ -14,8 +14,15 @@ public class PatientRepositoryImpl implements PatientRepositoryQuery{
 
 	@Override
 	public List<Patient> ListarMaximoCom(int primeiro, int maximo) {
-		TypedQuery<Patient> tiped = em.createQuery("SELECT FROM Patient patient order by datemodify", Patient.class);
-		return tiped.setFirstResult(primeiro).setMaxResults(maximo).getResultList();
+		try {
+			TypedQuery<Patient> tiped = em.createQuery("FROM Patient patient order by datemodify", Patient.class);
+			return tiped.setFirstResult(primeiro).setMaxResults(maximo).getResultList();
+		} catch (Exception e) {
+			System.out.println("deu erro aqui");
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.easy.domain.Series;
 import org.easy.repository.SeriesRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,17 +17,30 @@ import org.springframework.stereotype.Service;
 public class SeriesService {
 	@Autowired
 	private SeriesRepository dao;
+	private final Logger LOG = LoggerFactory.getLogger(SeriesService.class);
 
 	public List<Series> Listar() {
 		return this.dao.findAll(Sort.by(Sort.Direction.ASC, "datemodify"));
 	}
 
-	public List<Series> ListarResultMaximo(int primeiro, int maximo){
-		return this.dao.ListarMaximoCom(primeiro, maximo);
+	public List<Series> ListarResultMaximo(int primeiro, int maximo) {
+		try {
+			return this.dao.ListarMaximoCom(primeiro, maximo);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo ListarResultMaximo------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
 	}
-	
+
 	public Series Criar(Series serie) {
-		return this.dao.save(serie);
+		try {
+			return this.dao.save(serie);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo Criar------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public Series BuscarPorId(Long id) {
@@ -38,51 +53,84 @@ public class SeriesService {
 	}
 
 	public void Deletar(Long id) {
-		this.dao.deleteById(id);
+		try {
+			this.dao.deleteById(id);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo Deletar------------------ de StudyService");
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void Deletar(Series serie) {
-		this.dao.delete(serie);
+		try {
+			this.dao.delete(serie);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo Deletar------------------ de StudyService");
+			e.printStackTrace();
+		}
 	}
 
 	public Series Atualizar(Long id, Series serie) {
-		Series salvo = this.BuscarPorId(id);
-		BeanUtils.copyProperties(serie, salvo, "id");
-		return this.Criar(salvo);
-	}
-	
-	public Long QuantidadeTotal() {
-		return this.dao.count();
-	}
-	
-	public List<Series> BuscarPorIdEstudo(Long idstudy){
-		return this.dao.findByStudyIdstudy(idstudy);
-	}
-	
-	public Series BuscarPorSeriesinstanceuid(String seriesinstanceuid) {
-		return this.dao.findBySeriesinstanceuid(seriesinstanceuid);
-	}
-	
-	public Series BuscarPorSeriesInstanceENumber(String seriesinstanceuid, Integer numero) {
-		return this.dao.BuscarPorSeriesinstanceuid(seriesinstanceuid, numero);
+		try {
+			Series salvo = this.BuscarPorId(id);
+			BeanUtils.copyProperties(serie, salvo, "id");
+			return this.Criar(salvo);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo Atualizar------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 
-	public List<Series> BuscarTodosEstudosPorPacietne(Long idpatient){
-		return this.dao.findAllByStudyPatientIdpatient(idpatient);
+	public Long QuantidadeTotal() {
+		try {
+			return this.dao.count();
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo QuantidadeTotal------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<Series> BuscarPorIdEstudo(Long idstudy) {
+		try {
+			return this.dao.findByStudyIdstudy(idstudy);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo ------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Series BuscarPorSeriesinstanceuid(String seriesinstanceuid) {
+		try {
+			return this.dao.findBySeriesinstanceuid(seriesinstanceuid);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo BuscarPorSeriesinstanceuid------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Series BuscarPorSeriesInstanceENumber(String seriesinstanceuid, Integer numero) {
+		try {
+			return this.dao.BuscarPorSeriesinstanceuid(seriesinstanceuid, numero);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo BuscarPorSeriesInstanceENumber------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public List<Series> BuscarTodosEstudosPorPacietne(Long idpatient) {
+		try {
+			return this.dao.findAllByStudyPatientIdpatient(idpatient);
+		} catch (Exception e) {
+			LOG.error("Erro ao executar o metodo BuscarTodosEstudosPorPacietne------------------ de StudyService");
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
