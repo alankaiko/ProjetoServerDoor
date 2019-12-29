@@ -44,7 +44,7 @@ import com.google.common.eventbus.EventBus;
 @ComponentScan
 @EnableAutoConfiguration
 @EnableConfigurationProperties
-@EnableJpaRepositories(basePackages = {"org.easy.dao"}) // The package where dao classes reside
+@EnableJpaRepositories(basePackages = {"org.easy.repository"}) // The package where dao classes reside
 @PropertySource("classpath:application.properties")
 public class ProjetoServerDoorApplication {
 
