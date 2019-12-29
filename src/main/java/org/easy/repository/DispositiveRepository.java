@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DispositiveRepository extends JpaRepository<Dispositive, Long>{
-	
+	public Dispositive findBySeriesIdseries(Long idseries);
 }

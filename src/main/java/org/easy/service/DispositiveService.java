@@ -52,6 +52,8 @@ public class DispositiveService {
 		return this.dao.count();
 	}
 	
-	
+	public Dispositive BuscarPorSerieEquipamento(Long idseries) {
+		return this.dao.findBySeriesIdseries(idseries);
+	}
 
 }

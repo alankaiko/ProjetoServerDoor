@@ -19,6 +19,10 @@ public class StudyService {
 	public List<Study> Listar() {
 		return this.dao.findAll(Sort.by(Sort.Direction.ASC, "datemodify"));
 	}
+	
+	public List<Study> ListarResultMaximo(int primeiro, int maximo){
+		return this.dao.ListarMaximoCom(primeiro, maximo);
+	}
 
 	public Study Criar(Study estudo) {
 		return this.dao.save(estudo);
@@ -50,4 +54,13 @@ public class StudyService {
 	public Long QuantidadeTotal() {
 		return this.dao.count();
 	}
+	
+	public List<Study> BuscarPorIdPaciente(Long idpatient){
+		return this.dao.findByPatientIdpatient(idpatient);
+	}
+	
+	public Study BuscarPorStudyInstanceuid(String studyinstanceuid) {
+		return this.dao.findByStudyinstanceuid(studyinstanceuid);
+	}
+
 }

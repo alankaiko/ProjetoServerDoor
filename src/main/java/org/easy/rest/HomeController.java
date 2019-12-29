@@ -15,14 +15,14 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.dcm4che.tool.dcm2jpg.Dcm2Jpg;
 import org.easy.component.ActiveDicoms;
-import org.easy.dao.InstanceDao;
-import org.easy.dao.PatientDao;
-import org.easy.dao.SeriesDao;
-import org.easy.dao.StudyDao;
 import org.easy.domain.Instance;
 import org.easy.domain.Patient;
 import org.easy.domain.Series;
 import org.easy.domain.Study;
+import org.easy.service.InstanceService;
+import org.easy.service.PatientService;
+import org.easy.service.SeriesService;
+import org.easy.service.StudyService;
 import org.easy.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,16 +63,16 @@ public class HomeController {
 	private String pacsDcmStoragePath;
 	
 	@Autowired
-	PatientDao patientDao;
+	private PatientService PatientService;
 	
 	@Autowired
-	StudyDao studyDao;
+	private StudyService StudyService;
 	
 	@Autowired 
-	SeriesDao seriesDao;
+	private SeriesService SeriesService;
 	
 	@Autowired
-	InstanceDao instanceDao;
+	private InstanceService InstanceService;
 		
 	@Autowired
 	private ActiveDicoms activeDicoms;
@@ -94,9 +94,9 @@ public class HomeController {
 			LOG.debug("server()");
 
 			int firstResult = (page==null)?0:(page-1) * size;		
-			List<Patient> patients = patientDao.findAll(firstResult, size);
+			List<Patient> patients = this.PatientService.ListarResultMaximo(firstResult, size);
 			model.addAttribute("patients", patients);
-			float nrOfPages = (float) patientDao.count()/size;
+			float nrOfPages = (float) this.PatientService.QuantidadeTotal()/size;
 			int maxPages = (int)( ((nrOfPages>(int)nrOfPages) || nrOfPages==0.0)?nrOfPages+1:nrOfPages);
 			
 		    int begin = Math.max(1, page - 5);
@@ -108,9 +108,9 @@ public class HomeController {
 		    model.addAttribute("maxPages", maxPages);	    
 		    
 		    //get related study, series and instance objects
-		    List<Study> studies = (idpatient != 0)?studyDao.findByPkTBLPatientID(idpatient): studyDao.findByPkTBLPatientID(patients.get(0).getIdpatient());
-		   	List<Series> serieses = (idstudy != 0)?seriesDao.findByPkTBLStudyID(idstudy): seriesDao.findByPkTBLStudyID(studies.get(0).getIdstudy());
-		    List<Instance> instances = (idseries != 0)?instanceDao.findByPkTBLSeriesID(idseries): instanceDao.findByPkTBLSeriesID(serieses.get(0).getIdseries());
+		    List<Study> studies = (idpatient != 0)?this.StudyService.BuscarPorIdPaciente(idpatient): this.StudyService.BuscarPorIdPaciente(patients.get(0).getIdpatient());
+		   	List<Series> serieses = (idstudy != 0)?this.SeriesService.BuscarPorIdEstudo(idstudy): this.SeriesService.BuscarPorIdEstudo(studies.get(0).getIdstudy());
+		    List<Instance> instances = (idseries != 0)?this.InstanceService.BuscarPorIdSerieDaInstancia(idseries) : this.InstanceService.BuscarPorIdSerieDaInstancia(serieses.get(0).getIdseries());
 		    
 		    //add to our model
 		    model.addAttribute("studies", studies);
@@ -131,7 +131,7 @@ public class HomeController {
 	public ResponseEntity<byte[]> getImage(@PathVariable Long idinstance, HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		java.io.File tempImage = null;   
-	   	Instance instance = instanceDao.findById(idinstance);
+	   	Instance instance = this.InstanceService.BuscarPorId(idinstance);
 	   	
 	   	if(instance != null){
 	   		File dicomFile = new File(pacsDcmStoragePath + "/" + instance.getMediastoragesopinstanceuid()+".dcm");
@@ -177,7 +177,7 @@ public class HomeController {
 		
 		try
         {	    	
-			instance = instanceDao.findById(idinstance);
+			instance = this.InstanceService.BuscarPorId(idinstance);
 			
 		   	if(instance != null){
 		   		
@@ -227,7 +227,7 @@ public class HomeController {
 		
 		if(idpatient != 0){		
 		    //add to our model		    
-		    model.addAttribute("patient", patientDao.findById(idpatient));			
+		    model.addAttribute("patient", this.PatientService.BuscarPorId(idpatient));			
 		}
 		
 		return "details";
@@ -282,25 +282,25 @@ public class HomeController {
 	
 	@RequestMapping(value="/study", method = RequestMethod.GET)
 	public @ResponseBody AjaxStudy study(@RequestParam(defaultValue="0", value="idstudy", required=false) Long idstudy){		
-		Study study = studyDao.findById(idstudy);			
+		Study study = this.StudyService.BuscarPorId(idstudy);			
 		return new AjaxStudy(true, study);
 	}
 	
 	@RequestMapping(value="/series", method = RequestMethod.GET)
 	public @ResponseBody AjaxSeries series(@RequestParam(defaultValue="0", value="idseries", required=false) Long idseries){		
-		Series series = seriesDao.findById(idseries); 	
+		Series series = this.SeriesService.BuscarPorId(idseries); 	
 		return new AjaxSeries(true, series);
 	}
 	
 	@RequestMapping(value="/instance", method = RequestMethod.GET)
 	public @ResponseBody AjaxInstance instance(@RequestParam(defaultValue="0", value="idinstance", required=false) Long idinstance){		
-		Instance instance = instanceDao.findById(idinstance); 	
+		Instance instance = this.InstanceService.BuscarPorId(idinstance);	
 		return new AjaxInstance(true, instance);
 	}
 	
 	@RequestMapping(value="/patient", method = RequestMethod.GET)
 	public @ResponseBody AjaxPatient patient(@RequestParam(defaultValue="0", value="idpatient", required=false) Long idpatient){		
-		Patient patient = patientDao.findById(idpatient); 	
+		Patient patient = this.PatientService.BuscarPorId(idpatient); 	
 		return new AjaxPatient(true, patient);
 	}
 }

@@ -19,6 +19,10 @@ public class PatientService {
 	public List<Patient> Listar() {
 		return this.dao.findAll(Sort.by(Sort.Direction.ASC, "datemodify"));
 	}
+	
+	public List<Patient> ListarResultMaximo(int primeiro, int maximo){
+		return this.dao.ListarMaximoCom(primeiro, maximo);
+	}
 
 	public Patient Criar(Patient paciente) {
 		return this.dao.save(paciente);
@@ -49,5 +53,9 @@ public class PatientService {
 	
 	public Long QuantidadeTotal() {
 		return this.dao.count();
+	}
+	
+	public Patient BuscarPorPacienteId(String patientid) {
+		return this.dao.findByPatientid(patientid);
 	}
 }

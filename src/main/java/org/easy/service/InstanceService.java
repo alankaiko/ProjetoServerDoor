@@ -50,4 +50,17 @@ public class InstanceService {
 	public Long QuantidadeTotal() {
 		return this.dao.count();
 	}
+	
+	public List<Instance> BuscarPorIdSerieDaInstancia(Long idseries){
+		return this.dao.findBySeriesIdseries(idseries);
+	}
+	
+	public Instance BuscarPorInstanciaUid(String sopinstanceuid) {
+		return this.dao.findBySopinstanceuid(sopinstanceuid);
+	}
+
+	public List<Instance> BuscarPacientesPeloEstudoSerie(Long idpatient){
+		return this.dao.findAllByseriesStudyPatientIdpatient(idpatient);
+	}
+	
 }

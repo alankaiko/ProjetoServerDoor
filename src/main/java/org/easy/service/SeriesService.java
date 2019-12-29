@@ -20,6 +20,10 @@ public class SeriesService {
 		return this.dao.findAll(Sort.by(Sort.Direction.ASC, "datemodify"));
 	}
 
+	public List<Series> ListarResultMaximo(int primeiro, int maximo){
+		return this.dao.ListarMaximoCom(primeiro, maximo);
+	}
+	
 	public Series Criar(Series serie) {
 		return this.dao.save(serie);
 	}
@@ -50,4 +54,35 @@ public class SeriesService {
 	public Long QuantidadeTotal() {
 		return this.dao.count();
 	}
+	
+	public List<Series> BuscarPorIdEstudo(Long idstudy){
+		return this.dao.findByStudyIdstudy(idstudy);
+	}
+	
+	public Series BuscarPorSeriesinstanceuid(String seriesinstanceuid) {
+		return this.dao.findBySeriesinstanceuid(seriesinstanceuid);
+	}
+	
+	public Series BuscarPorSeriesInstanceENumber(String seriesinstanceuid, Integer numero) {
+		return this.dao.BuscarPorSeriesinstanceuid(seriesinstanceuid, numero);
+	}
+
+	public List<Series> BuscarTodosEstudosPorPacietne(Long idpatient){
+		return this.dao.findAllByStudyPatientIdpatient(idpatient);
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
